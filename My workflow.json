@@ -1,0 +1,244 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "1hPJLbEVos6K1Zu1j7J-ZfCbLjEzNtbYyIcSBtdf1eyc",
+          "mode": "list",
+          "cachedResultName": "แบบฟอร์มสมัครงานบริษัท Babiebloom (การตอบกลับ)",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1hPJLbEVos6K1Zu1j7J-ZfCbLjEzNtbYyIcSBtdf1eyc/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 652185025,
+          "mode": "list",
+          "cachedResultName": "การตอบแบบฟอร์ม 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1hPJLbEVos6K1Zu1j7J-ZfCbLjEzNtbYyIcSBtdf1eyc/edit#gid=652185025"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        -2208,
+        64
+      ],
+      "id": "09aa32cb-92e5-4590-911c-93b29ba1a979",
+      "name": "Google Sheets Trigger",
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "ojzJgOcpG8iMWsdD",
+          "name": "Google Sheets Trigger account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "return [\n  { json: { position: \"ตำแหน่ง พนักงานบัญชี\" } },\n  { json: { position: \"ตำแหน่งพนักงานฝ่ายการตลาด\" } },\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1888,
+        64
+      ],
+      "id": "a1d639c8-a01a-48e1-8512-e9d4fb03c3b9",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "resource": "spreadsheet",
+        "title": "={{ $json.position }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -1600,
+        64
+      ],
+      "id": "caf78ccd-8c05-4264-88c4-a72d2c64c687",
+      "name": "Create spreadsheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "mmhLNvhXoabscsvg",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "182b50e1-24b2-4a33-8f3d-0e85a8bfb976",
+              "leftValue": "={{ $json.properties.title }}",
+              "rightValue": "ตำแหน่ง พนักงานบัญชี",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -1344,
+        64
+      ],
+      "id": "e143c888-2fbf-4dd2-b895-0b7ae1f1cd82",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1qnsKWd1F6j3A1FY_zpECxJVPtuqyb05fJDyVowdvGcM",
+          "mode": "list",
+          "cachedResultName": "ตำแหน่ง พนักงานบัญชี",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1qnsKWd1F6j3A1FY_zpECxJVPtuqyb05fJDyVowdvGcM/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "ชีต1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1qnsKWd1F6j3A1FY_zpECxJVPtuqyb05fJDyVowdvGcM/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -1008,
+        -112
+      ],
+      "id": "3e3d6602-6c4c-40c7-a4f0-20dc410ec44f",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "mmhLNvhXoabscsvg",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1bM7GjjU_ralPON2qL5R5p5ge1i11beGiq3_4ZoeXaxc",
+          "mode": "list",
+          "cachedResultName": "ตำแหน่งพนักงานฝ่ายการตลาด",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1bM7GjjU_ralPON2qL5R5p5ge1i11beGiq3_4ZoeXaxc/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "ชีต1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1bM7GjjU_ralPON2qL5R5p5ge1i11beGiq3_4ZoeXaxc/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -1008,
+        128
+      ],
+      "id": "c205d522-4b3c-4ded-af03-22bb34f4af71",
+      "name": "Get row(s) in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "mmhLNvhXoabscsvg",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Google Sheets Trigger": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Create spreadsheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create spreadsheet": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get row(s) in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "0503eb22-4bda-409a-970d-4031239da1ef",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "4b4e85e8b9218dad7b9e2cc40ba819f80d93657511ea647b3d041938ade8ccfa"
+  },
+  "id": "MliNNEhJodpKmTnE",
+  "tags": []
+}
